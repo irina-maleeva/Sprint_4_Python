@@ -16,6 +16,7 @@ class OrderPage:
     order_created_message = [By.XPATH, './/div[text()="Заказ оформлен"]']
     samokat_logo = [By.XPATH, './/img[@alt="Scooter"]']
     yandex_logo = [By.XPATH, './/img[@alt="Yandex"]']
+    yes_button = [By.XPATH, './/button[text()="Да"]']
 
     def __init__(self, driver):
         self.driver = driver
@@ -65,3 +66,9 @@ class OrderPage:
     @allure.step('Нажать на логотип "Яндекс"')
     def click_yandex_logo(self):
         self.driver.find_element(*self.yandex_logo).click()
+
+    @allure.step('Нажать на кнопку "Да" в форме "Хотите оформить заказ?')
+    def click_yes_button(self):
+        WebDriverWait(self.driver, 5).until(
+            expected_conditions.visibility_of_element_located(self.yes_button))
+        self.driver.find_element(*self.yes_button).click()
