@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 class OrderPage:
+    path = 'order'
     form_heading = [By.XPATH, '//div[text()="Для кого самокат"]']
     name_input_field = [By.XPATH, './/input[@placeholder="* Имя"]']
     family_name_input_field = [By.XPATH, './/input[@placeholder="* Фамилия"]']
@@ -55,7 +56,7 @@ class OrderPage:
     def wait_confirmation(self):
         WebDriverWait(self.driver,5).until(expected_conditions.visibility_of_element_located(self.order_created_message))
 
-    @allure.step('Убедиться что текст во всплывающем окне "Заказ оформлен"')
+    @allure.step('Получить текст всплывающего окна "Заказ оформлен"')
     def get_confirmation_heading_text(self):
         return self.driver.find_element(*self.order_created_message).text
 
